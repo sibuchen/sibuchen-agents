@@ -1,0 +1,62 @@
+# SibuchenAgents v0.1.1 核心依赖
+# 安装基础环境：pip install sibuchen-agents
+# 完整功能安装：pip install "sibuchen-agents[all]"
+
+# ==========================================
+# 1. 核心依赖 - 基础功能必需
+# ==========================================
+google-genai>=1.73.1                # Google Gemini API 官方 SDK
+numpy>=2.0.0,<3.0.0                 # 基础数学运算与矩阵处理
+openai>=1.0.0,<2.0.0                # OpenAI/互操作 API 官方 SDK
+pydantic>=2.0.0,<3.0.0              # 数据建模与类型验证
+pydantic-settings>=2.0              # Pydantic 环境变量与配置管理
+python-dotenv>=0.19.0,<2.0.0        # 加载 .env 配置文件
+pyyaml>=6.0.0                       # YAML 格式配置文件解析
+requests>=2.25.0,<3.0.0             # 标准 HTTP 网络请求库
+tiktoken>=0.5.0                     # OpenAI Token 计数器
+beautifulsoup4>=4.9.0,<5.0.0        # 网页 HTML 解析与清洗
+dashscope                           # 阿里灵积 (通义千问) SDK
+librosa                             # 语音与音频信号处理
+networkx>=2.6.0,<4.0.0              # 复杂网络/图结构处理 (可选保留)
+
+# ==========================================
+# 2. 搜索功能依赖 - 可选: [search]
+# ==========================================
+markdownify                         # 将 HTML 转换为 Markdown 格式
+tavily-python>=0.7.12               # Tavily AI 搜索 API SDK
+google-search-results>=2.4.2        # SerpApi Google 搜索接口
+duckduckgo-search                   # DuckDuckGo 隐私搜索集成
+
+# ==========================================
+# 3. 记忆系统依赖 - 可选: [memory]
+# ==========================================
+Pillow                              # 图像处理库 (图片存储/转换)
+qdrant-client>=1.9.0,<1.16.0        # Qdrant 向量数据库客户端 (注: 1.16.0 后版本有 API 变动)
+neo4j>=5.0.0                        # Neo4j 图数据库官方驱动
+spacy>=3.4.0                        # NLP 实体识别与分词 (需下载模型)
+scikit-learn>=1.0.0                 # 特征提取与聚类分析
+
+# ==========================================
+# 4. RAG 系统依赖 - 可选: [rag]
+# ==========================================
+langdetect                          # 文本语种自动检测
+transformers>=4.20.0                # Hugging Face Transformer 模型库
+torch>=1.12.0                       # PyTorch 深度学习计算后端
+sentence-transformers>=2.2.0        # 句子嵌入 (Embedding) 专业库
+markitdown>=0.0.1                   # 微软通用文档转 Markdown 工具
+pypdf>=3.9.0                        # PDF 基础读取与合并
+pdfminer.six>=20221105              # PDF 深度文本/布局提取
+
+# ==========================================
+# 5. 协议与交互支持 - 可选: [protocols]
+# ==========================================
+fastmcp>=2.0.0,<3.0.0               # Model Context Protocol (MCP) 服务端框架
+a2a-sdk>=0.1.0                      # Agent-to-Agent 跨智能体通讯 SDK
+
+# ==========================================
+# 6. IM 集成依赖 - 可选: [im]
+# ==========================================
+nonebot2>=2.5.0                     # 跨平台机器人异步框架
+nonebot2[fastapi]>=2.5.0            # NoneBot FastAPI 核心驱动器
+nonebot-adapter-telegram>=0.1.0b20  # Telegram 协议适配器
+nonebot-adapter-feishu>=2.6.0       # 飞书协议适配器
