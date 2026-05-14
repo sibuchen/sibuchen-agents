@@ -2,80 +2,84 @@
 
 <div align="center">
 
-**模块化、可扩展的 Python AI Agent 框架**
-<!-- 动态徽章 -->
+**Modular, Extensible Python AI Agent Framework**
+<!-- Dynamic badges -->
 [![PyPI version](https://img.shields.io/pypi/v/sibuchen-agents?label=Version&color=3775A9&logo=pypi&logoColor=3775A9)](https://pypi.org/project/sibuchen-agents/)
 [![Python](https://img.shields.io/pypi/pyversions/sibuchen-agents?label=Python&color=3776AB&logo=python&logoColor=3776AB)](https://pypi.org/project/sibuchen-agents/)
-<!-- 静态徽章 https://img.shields.io/badge/<左侧文字>-<右侧文字>-<颜色> -->
+<!-- Static badges https://img.shields.io/badge/<left>-<right>-<color> -->
 [![License](https://img.shields.io/badge/License-GPLv3-D6336C.svg?logo=GPLv3&logoColor=BD0000)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub](https://img.shields.io/badge/GitHub-sibuchen--agents-181717?logo=github&logoColor=181717)](https://github.com/sibuchen/sibuchen-agents)
 [![Author](https://img.shields.io/badge/Author-sibuchen-orange?logo=github&logoColor=181717)](https://github.com/sibuchen/)
 
 </div>
 
-SibuchenAgents 是一个面向开发者的 Python AI Agent 框架，提供多种推理范式、丰富的内置工具、智能记忆系统与多协议通信能力，帮助你快速构建可用于生产的 AI Agent 应用。
+<p align="center">
+  <a href="./README.md">English</a> | <a href="./README_CN.md">简体中文</a> | <a href="./README_TC.md">繁體中文</a> | <a href="./README_JP.md">日本語</a> | <a href="./README_RU.md">Русский</a>
+</p>
+
+SibuchenAgents is a Python AI Agent framework for developers. It offers multiple reasoning paradigms, a rich set of built-in tools, an intelligent memory system, and multi-protocol communication capabilities to help you rapidly build production-ready AI Agent applications.
 
 ---
 
-## ✨ 核心特性
+## Core Features
 
-- **多推理范式**：SimpleAgent、ReActAgent、FunctionCallAgent、ReflectionAgent、PlanAndSolveAgent、ToolAwareSimpleAgent
-- **多 LLM 后端**：OpenAI、Google Gemini、DashScope（阿里云）及任意 OpenAI 兼容接口
-- **丰富内置工具**：文件操作、终端执行、搜索引擎、RAG 检索、记忆存储、任务管理、计算器等 14+ 工具
-- **智能记忆系统**：对话历史管理、向量存储（Qdrant）、图谱存储（Neo4j）、RAG 检索
-- **多协议支持**：MCP（Model Context Protocol）、A2A（Agent-to-Agent）、ANP（Agent Network Protocol）
-- **即时通讯（IM）**：基于 NoneBot2，支持 Telegram、飞书（Feishu）
-- **可观测性**：完整的 Trace 链路记录与 HTML 报告生成
-- **上下文工程**：自动上下文压缩与智能摘要
-- **熔断机制**：工具执行熔断器，防止级联失败
-- **流式输出**：支持 LLM 流式响应
-- **Skills 系统**：外部知识技能文件热加载
+- **Multiple Reasoning Paradigms**: SimpleAgent, ReActAgent, FunctionCallAgent, ReflectionAgent, PlanAndSolveAgent, ToolAwareSimpleAgent
+- **Multiple LLM Backends**: OpenAI, Google Gemini, DashScope (Alibaba Cloud), and any OpenAI-compatible endpoint
+- **Rich Built-in Tools**: File operations, terminal execution, search engines, RAG retrieval, memory storage, task management, calculator, and 14+ more tools
+- **Intelligent Memory System**: Conversation history management, vector storage (Qdrant), graph storage (Neo4j), RAG retrieval
+- **Multi-Protocol Support**: MCP (Model Context Protocol), A2A (Agent-to-Agent), ANP (Agent Network Protocol)
+- **Instant Messaging (IM)**: Built on NoneBot2, with support for Telegram and Feishu (Lark)
+- **Observability**: Full trace logging with HTML report generation
+- **Context Engineering**: Automatic context compression and intelligent summarization
+- **Circuit Breaker**: Tool execution circuit breaker to prevent cascading failures
+- **Streaming Output**: Supports LLM streaming responses
+- **Skills System**: Hot-loading of external knowledge skill files
 
 ---
 
-## 📦 安装
+## Installation
 
-### 核心安装（最小依赖）
+### Core Installation (Minimal Dependencies)
 
 ```bash
 pip install sibuchen-agents
 ```
 
-### 按需安装可选模块
+### Install Optional Modules as Needed
 
 ```bash
-# 搜索工具（Tavily、SerpApi、DuckDuckGo）
+# Search tools (Tavily, SerpApi, DuckDuckGo)
 pip install "sibuchen-agents[search]"
 
-# 记忆系统（Qdrant 向量库 + Neo4j 图数据库）
+# Memory system (Qdrant vector store + Neo4j graph database)
 pip install "sibuchen-agents[memory]"
 
-# RAG 检索（transformers、sentence-transformers、PDF 解析）
+# RAG retrieval (transformers, sentence-transformers, PDF parsing)
 pip install "sibuchen-agents[rag]"
 
-# 通信协议（MCP、A2A）
+# Communication protocols (MCP, A2A)
 pip install "sibuchen-agents[protocols]"
 
-# 即时通讯（NoneBot2 + Telegram/飞书适配器）
+# Instant messaging (NoneBot2 + Telegram/Feishu adapters)
 pip install "sibuchen-agents[im]"
 
-# 全功能安装
+# Full installation
 pip install "sibuchen-agents[all]"
 ```
 
 ---
 
-## ⚡ 快速开始
+## Quick Start
 
-### 1. 配置环境变量
+### 1. Configure Environment Variables
 
-复制并编辑 `.env.example` 文件：
+Copy and edit the `.env.example` file:
 
 ```bash
 cp .env.example .env
 ```
 
-最小配置：
+Minimal configuration:
 
 ```env
 LLM_BASE_URL=https://api.openai.com/v1
@@ -83,14 +87,14 @@ LLM_API_KEY=your-api-key
 LLM_MODEL_ID=gpt-4o
 ```
 
-### 2. 基础用法
+### 2. Basic Usage
 
 ```python
 import asyncio
 from sibuchen_agents import SimpleAgent, SibuchenConfig
 
 async def main():
-    config = SibuchenConfig()  # 自动读取 .env
+    config = SibuchenConfig()  # Automatically reads .env
     agent = SimpleAgent(config=config)
 
     response = await agent.run("帮我写一首关于人工智能的诗。")
@@ -99,7 +103,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 3. 使用工具的 ReAct Agent
+### 3. ReAct Agent with Tools
 
 ```python
 import asyncio
@@ -118,7 +122,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 4. Function Call Agent（OpenAI 原生工具调用）
+### 4. Function Call Agent (Native OpenAI Tool Calling)
 
 ```python
 import asyncio
@@ -137,7 +141,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 5. 流式输出
+### 5. Streaming Output
 
 ```python
 import asyncio
@@ -155,101 +159,155 @@ asyncio.run(main())
 
 ---
 
-## 🗂️ 项目结构
+## Project Structure
 
 ```
 src/sibuchen_agents/
-├── agents/                   # Agent 推理范式
-│   ├── simple_agent.py       # SimpleAgent - 基础对话
-│   ├── react_agent.py        # ReActAgent - 思考-行动循环
-│   ├── function_call_agent.py # FunctionCallAgent - OpenAI 工具调用
-│   ├── reflection_agent.py   # ReflectionAgent - 自我反思迭代
-│   ├── plan_solve_agent.py   # PlanAndSolveAgent - 规划与执行
-│   ├── tool_aware_agent.py   # ToolAwareSimpleAgent - 工具感知对话
-│   └── factory.py            # Agent 工厂与子代理机制
-├── core/                     # 核心基础设施
-│   ├── agent.py              # 基类 Agent（含完整执行生命周期）
-│   ├── config.py             # SibuchenConfig（pydantic-settings）
-│   ├── llm_client.py         # 统一 LLM 客户端
-│   ├── llm_adapters.py       # 多 LLM 后端适配器
-│   ├── llm_response.py       # LLMResponse 数据结构
-│   ├── message.py            # SibuchenMessage 消息格式
-│   ├── session_store.py      # 会话持久化
-│   ├── streaming.py          # 流式输出支持
-│   ├── lifecycle.py          # 异步生命周期钩子
-│   └── exceptions.py         # 异常定义
-├── tools/                    # 工具系统
-│   ├── base.py               # Tool 基类与装饰器
-│   ├── registry.py           # ToolRegistry 工具注册表
-│   ├── circuit_breaker.py    # 熔断器
-│   ├── tool_filter.py        # 工具过滤器
-│   └── builtin/              # 内置工具（14个）
-│       ├── calculator_tool.py
-│       ├── file_tools.py
-│       ├── terminal_tool.py
-│       ├── search_tool.py
-│       ├── rag_tool.py
-│       ├── memory_tool.py
-│       ├── note_tool.py
-│       ├── task_tool.py
-│       ├── todowrite_tool.py
-│       ├── devlog_tool.py
-│       ├── skill_tool.py
-│       ├── mcp_wrapper_tool.py
-│       └── protocol_tools.py
-├── memory/                   # 记忆系统
-│   ├── manager.py            # MemoryManager（统一入口）
-│   ├── embedding.py          # 嵌入模型（DashScope/Local/TF-IDF）
-│   ├── storage/              # 存储后端（文件/Qdrant/Neo4j）
-│   ├── rag/                  # RAG 检索增强
-│   └── types/                # 记忆类型定义
-├── protocols/                # 多协议通信
-│   ├── mcp/                  # Model Context Protocol
-│   ├── a2a/                  # Agent-to-Agent Protocol
-│   ├── anp/                  # Agent Network Protocol
-│   └── im/                   # 即时通讯（NoneBot2）
-├── context/                  # 上下文工程
-├── observability/            # 可观测性与 Trace
-├── skills/                   # Skills 知识外化系统
-└── utils/                    # 通用工具函数
+├── __init__.py                              # Package initialization
+├── agents
+│   ├── __init__.py                          # Agent module initialization
+│   ├── factory.py                           # Agent factory and instance creation logic
+│   ├── function_call_agent.py               # Function Call Agent
+│   ├── plan_solve_agent.py                  # Plan-and-Solve paradigm Agent
+│   ├── react_agent.py                       # ReAct paradigm Agent
+│   ├── reflection_agent.py                  # Reflection paradigm Agent
+│   ├── simple_agent.py                      # Simple Agent
+│   └── tool_aware_agent.py                  # Tool-Aware Agent
+├── context
+│   ├── __init__.py                          # Context module initialization
+│   ├── builder.py                           # Prompt context builder
+│   ├── history.py                           # Conversation history management
+│   ├── token_counter.py                     # Token counting and calculation
+│   └── truncator.py                         # Context trimming and truncation
+├── core
+│   ├── __init__.py                          # Core module initialization
+│   ├── agent.py                             # Agent abstract base class
+│   ├── config.py                            # Global configuration management
+│   ├── exceptions.py                        # Custom exception definitions
+│   ├── lifecycle.py                         # Agent lifecycle management
+│   ├── llm_adapters.py                      # LLM multi-model adapters
+│   ├── llm_client.py                        # LLM client wrapper
+│   ├── llm_response.py                      # LLM response object definitions
+│   ├── message.py                           # Message structure definitions
+│   ├── session_store.py                     # Session storage
+│   └── streaming.py                         # Streaming output handling
+├── memory
+│   ├── __init__.py                          # Memory module initialization
+│   ├── base.py                              # Memory abstract base class
+│   ├── embedding.py                         # Vector embedding processing
+│   ├── manager.py                           # Memory manager
+│   ├── rag
+│   │   ├── __init__.py                      # RAG module initialization
+│   │   ├── document.py                      # RAG document object definitions
+│   │   └── pipeline.py                      # RAG retrieval-augmented generation pipeline
+│   ├── storage
+│   │   ├── __init__.py                      # Storage layer initialization
+│   │   ├── document_store.py                # Document store implementation
+│   │   ├── neo4j_store.py                   # Neo4j graph database storage
+│   │   └── qdrant_store.py                  # Qdrant vector database storage
+│   └── types
+│       ├── __init__.py                      # Memory types initialization
+│       ├── core_memory.py                   # Core memory structure
+│       ├── long_term_memory.py              # Long-term memory implementation
+│       ├── multimodal_memory.py             # Multimodal memory implementation
+│       └── short_term_memory.py             # Short-term memory implementation
+├── observability
+│   ├── __init__.py                          # Observability module initialization
+│   └── trace_logger.py                      # Trace logging
+├── protocols
+│   ├── __init__.py                          # Protocols module initialization
+│   ├── a2a
+│   │   ├── __init__.py                      # A2A protocol initialization
+│   │   └── implementation.py                # A2A protocol implementation
+│   ├── anp
+│   │   ├── __init__.py                      # ANP protocol initialization
+│   │   └── implementation.py                # ANP protocol implementation
+│   ├── base.py                              # Protocol abstract base class
+│   ├── im
+│   │   ├── __init__.py                      # IM protocol initialization
+│   │   ├── adapters                         # IM platform adapter directory
+│   │   │   ├── __init__.py                  # IM adapter module initialization
+│   │   │   ├── feishu_adapter.py            # Feishu IM platform adapter
+│   │   │   ├── telegram_adapter.py          # Telegram IM platform adapter
+│   │   │   └── *.py                         # Custom IM platform adapters
+│   │   ├── plugin.py                        # IM plugin mechanism
+│   │   ├── rate_limiter.py                  # Message rate limiting
+│   │   ├── server.py                        # IM server implementation
+│   │   └── session_manager.py               # IM session management
+│   └── mcp
+│       ├── __init__.py                      # MCP protocol initialization
+│       ├── client.py                        # MCP client implementation
+│       ├── server.py                        # MCP server implementation
+│       └── utils.py                         # MCP utility functions
+├── skills
+│   ├── __init__.py                          # Skills module initialization
+│   └── loader.py                            # Skills dynamic loader
+├── tools
+│   ├── __init__.py                          # Tools module initialization
+│   ├── base.py                              # Tool abstract base class
+│   ├── builtin
+│   │   ├── __init__.py                      # Built-in tools initialization
+│   │   ├── calculator_tool.py               # Calculator tool
+│   │   ├── devlog_tool.py                   # Development log tool
+│   │   ├── file_tools.py                    # File operations toolset
+│   │   ├── mcp_wrapper_tool.py              # MCP tool wrapper
+│   │   ├── memory_tool.py                   # Memory operations tool
+│   │   ├── note_tool.py                     # Note management tool
+│   │   ├── protocol_tools.py                # Protocol-related tools
+│   │   ├── rag_tool.py                      # RAG retrieval tool
+│   │   ├── search_tool.py                   # Search tool
+│   │   ├── skill_tool.py                    # Skill invocation tool
+│   │   ├── task_tool.py                     # Task management tool
+│   │   ├── terminal_tool.py                 # Terminal execution tool
+│   │   └── todowrite_tool.py                # Todo write tool
+│   ├── circuit_breaker.py                   # Circuit breaker mechanism
+│   ├── errors.py                            # Tool exception definitions
+│   ├── registry.py                          # Tool registry
+│   ├── response.py                          # Tool response structure
+│   └── tool_filter.py                       # Tool permission filter
+└── utils
+    ├── __init__.py                          # Utils module initialization
+    ├── helpers.py                           # Common helper functions
+    ├── logging.py                           # Logging wrapper
+    └── serialization.py                     # Serialization and deserialization utilities
 ```
 
 ---
 
-## 🤖 支持的 Agent 范式
+## Supported Agent Paradigms
 
-| Agent | 适用场景 | 工具支持 |
+| Agent | Use Case | Tool Support |
 |---|---|---|
-| `SimpleAgent` | 通用对话、文本生成 | 可选 |
-| `ReActAgent` | 需要工具调用的推理任务 | ✅ |
-| `FunctionCallAgent` | OpenAI Function Calling 风格 | ✅ |
-| `ReflectionAgent` | 需要自我校正的任务 | 可选 |
-| `PlanAndSolveAgent` | 复杂多步骤规划任务 | ✅ |
-| `ToolAwareSimpleAgent` | 工具感知的增强对话 | ✅ |
+| `SimpleAgent` | General conversation, text generation | Optional |
+| `ReActAgent` | Reasoning tasks that require tool invocation | Yes |
+| `FunctionCallAgent` | OpenAI Function Calling style | Yes |
+| `ReflectionAgent` | Tasks that require self-correction | Optional |
+| `PlanAndSolveAgent` | Complex multi-step planning tasks | Yes |
+| `ToolAwareSimpleAgent` | Tool-aware enhanced conversation | Yes |
 
 ---
 
-## 🛠️ 内置工具列表
+## Built-in Tool List
 
-| 工具 | 功能 | 可选依赖 |
+| Tool | Description | Optional Dependencies |
 |---|---|---|
-| `CalculatorTool` | 数学表达式计算 | — |
-| `FileReadTool` / `FileWriteTool` / ... | 文件读写、目录操作、代码搜索 | — |
-| `TerminalTool` | 执行系统终端命令 | — |
-| `SearchTool` | 多引擎搜索（Tavily/SerpApi/DuckDuckGo） | `[search]` |
-| `RAGTool` | 文档检索增强生成 | `[rag]` |
-| `MemoryTool` | 向量/图谱记忆存储与检索 | `[memory]` |
-| `NoteTool` | 持久化笔记管理 | — |
-| `TaskTool` | 任务拆解与进度追踪 | — |
-| `TodoWriteTool` | 待办事项管理 | — |
-| `DevLogTool` | 开发日志记录 | — |
-| `SkillTool` | 外部 Skill 文件加载执行 | — |
-| `MCPWrapperTool` | MCP 工具适配包装 | `[protocols]` |
-| `ProtocolTools` | A2A/ANP 协议工具 | `[protocols]` |
+| `CalculatorTool` | Mathematical expression evaluation | -- |
+| `FileReadTool` / `FileWriteTool` / ... | File read/write, directory operations, code search | -- |
+| `TerminalTool` | Execute system terminal commands | -- |
+| `SearchTool` | Multi-engine search (Tavily/SerpApi/DuckDuckGo) | `[search]` |
+| `RAGTool` | Retrieval-augmented generation | `[rag]` |
+| `MemoryTool` | Vector/graph memory storage and retrieval | `[memory]` |
+| `NoteTool` | Persistent note management | -- |
+| `TaskTool` | Task decomposition and progress tracking | -- |
+| `TodoWriteTool` | Todo list management | -- |
+| `DevLogTool` | Development log recording | -- |
+| `SkillTool` | External skill file loading and execution | -- |
+| `MCPWrapperTool` | MCP tool adapter wrapper | `[protocols]` |
+| `ProtocolTools` | A2A/ANP protocol tools | `[protocols]` |
 
 ---
 
-## 🔌 多 LLM 后端支持
+## Multi-LLM Backend Support
 
 ```python
 from sibuchen_agents import SibuchenConfig
@@ -261,20 +319,20 @@ config = SibuchenConfig(
     llm_model_id="gpt-4o"
 )
 
-# Google Gemini（通过 google-genai SDK）
+# Google Gemini (via google-genai SDK)
 config = SibuchenConfig(
     llm_api_key="AIza...",
     llm_model_id="gemini-2.0-flash"
 )
 
-# DashScope（阿里云）
+# DashScope (Alibaba Cloud)
 config = SibuchenConfig(
     llm_base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     llm_api_key="sk-...",
     llm_model_id="qwen-max"
 )
 
-# 任意 OpenAI 兼容接口（Ollama、LM Studio 等）
+# Any OpenAI-compatible endpoint (Ollama, LM Studio, etc.)
 config = SibuchenConfig(
     llm_base_url="http://localhost:11434/v1",
     llm_api_key="ollama",
@@ -284,9 +342,9 @@ config = SibuchenConfig(
 
 ---
 
-## 🔗 协议支持
+## Protocol Support
 
-### MCP（Model Context Protocol）
+### MCP (Model Context Protocol)
 
 ```python
 from sibuchen_agents.protocols.mcp import MCPClient
@@ -296,7 +354,7 @@ async with MCPClient(server_url="http://localhost:8000/mcp") as client:
     result = await client.call_tool("tool_name", {"param": "value"})
 ```
 
-### A2A（Agent-to-Agent）
+### A2A (Agent-to-Agent)
 
 ```python
 from sibuchen_agents.protocols.a2a import A2AClient
@@ -307,9 +365,9 @@ response = await client.send_task("帮我分析这段数据...")
 
 ---
 
-## 💬 即时通讯（IM）
+## Instant Messaging (IM)
 
-基于 [NoneBot2](https://nonebot.dev/)，支持 Telegram 和飞书（Feishu）接入：
+Built on [NoneBot2](https://nonebot.dev/), with support for Telegram and Feishu (Lark) integration:
 
 ```env
 # .env
@@ -319,7 +377,7 @@ IM_SESSION_ISOLATION=true
 TELEGRAM_BOT_TOKEN=your_token
 ```
 
-安装并启动：
+Install and start:
 
 ```bash
 pip install "sibuchen-agents[im]"
@@ -328,66 +386,66 @@ python -m sibuchen_agents.protocols.im.server
 
 ---
 
-## 📊 可观测性
+## Observability
 
-每次 Agent 运行自动生成 Trace 记录：
+Each agent run automatically generates trace records:
 
 ```env
 TRACE_ENABLED=True
 TRACE_DIR=output/memory/traces
 ```
 
-Trace 文件以 JSON 和 HTML 格式保存，完整记录每步的输入、输出、工具调用与耗时。
+Trace files are saved in JSON and HTML formats, capturing the input, output, tool calls, and latency for every step.
 
 ---
 
-## ⚙️ 配置参考
+## Configuration Reference
 
-完整配置项见 [`.env.example`](.env.example)，支持通过环境变量或 `.env` 文件配置。主要分组：
+See [`.env.example`](.env.example) for the full list of configuration options. Configuration is supported via environment variables or a `.env` file. Main groups:
 
-| 分组 | 说明 |
+| Group | Description |
 |---|---|
-| `LLM_*` | 主 LLM 服务配置 |
-| `SUMMARY_LLM_*` | 摘要专用 LLM 配置 |
-| `CONTEXT_*` | 上下文压缩配置 |
-| `TRACE_*` | 可观测性配置 |
-| `SESSION_*` | 会话持久化配置 |
-| `MEMORY_*` / `QDRANT_*` / `NEO4J_*` | 记忆系统配置 |
-| `EMBED_*` | 嵌入模型配置 |
-| `IM_*` / `TELEGRAM_*` / `FEISHU_*` | 即时通讯配置 |
-| `SUBAGENT_*` | 子代理配置 |
+| `LLM_*` | Primary LLM service configuration |
+| `SUMMARY_LLM_*` | Dedicated summarization LLM configuration |
+| `CONTEXT_*` | Context compression settings |
+| `TRACE_*` | Observability settings |
+| `SESSION_*` | Session persistence settings |
+| `MEMORY_*` / `QDRANT_*` / `NEO4J_*` | Memory system configuration |
+| `EMBED_*` | Embedding model configuration |
+| `IM_*` / `TELEGRAM_*` / `FEISHU_*` | Instant messaging configuration |
+| `SUBAGENT_*` | Sub-agent configuration |
 
 ---
 
-## 🧪 开发与测试
+## Development and Testing
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone https://github.com/sibuchen/sibuchen-agents.git
 cd sibuchen-agents
 
-# 安装开发依赖
+# Install development dependencies
 pip install -e ".[dev]"
 
-# 运行测试
+# Run tests
 pytest
 
-# 代码格式化
+# Code formatting
 black src/
 ruff check src/
 ```
 
 ---
 
-## 📄 许可证
+## License
 
-本项目采用 [GNU General Public License v3.0](LICENSE) 开源协议。
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
 ---
 
-## 🙏 致谢
+## Acknowledgements
 
-本框架参考并借鉴了以下优秀开源项目的设计理念：
+This framework draws inspiration from the design philosophies of the following outstanding open-source projects:
 
 - [LangChain](https://github.com/langchain-ai/langchain)
 - [smolagents](https://github.com/huggingface/smolagents)
